@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from utils.wait_element import wait_for_element
 import os
 from dotenv import load_dotenv
+from selenium.webdriver.support.select import Select
 
 
 load_dotenv()
@@ -49,7 +50,7 @@ class LoginPage:
             self.password
         )
 
-        # login_button_locator = (By.ID, 'btnlogin')
-        # print("Bucando o botão de login")
-        # self.driver.find_element(*login_button_locator).submit()
-        
+        makercombobox = self.driver.find_element(By.ID, "MakerComboBox")
+        select_div = makercombobox.find_element(By.CLASS_NAME, "HTMLButton")
+        select_button = select_div.find_element(By.TAG_NAME, "button")
+        self.driver.execute_script("arguments[0].click();", select_button)

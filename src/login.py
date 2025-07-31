@@ -1,5 +1,6 @@
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.action_chains import ActionChains
 from utils.wait_element import wait_for_element
 import os
 from dotenv import load_dotenv
@@ -50,7 +51,16 @@ class LoginPage:
             self.password
         )
 
-        makercombobox = self.driver.find_element(By.ID, "MakerComboBox")
-        select_div = makercombobox.find_element(By.CLASS_NAME, "HTMLButton")
-        select_button = select_div.find_element(By.TAG_NAME, "button")
-        self.driver.execute_script("arguments[0].click();", select_button)
+        location_select = self.driver.find_element(By.TAG_NAME, "button")
+        self.driver.execute_script("arguments[0].click();", location_select)
+
+        select_element = self.driver.find_element(By.ID, "lookupInput")
+        script = f"""
+            var select = arguments[0];
+            select.value = '{"PM_Cocos"}';
+        """
+        self.driver.execute_script(script, select_element)
+        option = select_element.find_element(By.XPATH, "//option[@value='PM_Cocos']")
+
+        actions = ActionChains(self.driver)
+        actions.move_to_element(option).click().perform()

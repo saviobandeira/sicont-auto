@@ -66,3 +66,6 @@ class LoginPage:
 
         actions = ActionChains(self.driver)
         actions.move_to_element(option).click().perform()
+
+        login_button = self.driver.find_element(By.ID, "btnlogin")
+        actions.move_to_element(login_button).click().perform()

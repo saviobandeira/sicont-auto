@@ -51,7 +51,9 @@ class LoginPage:
             self.password
         )
 
-        location_select = self.driver.find_element(By.TAG_NAME, "button")
+        location_container = self.driver.find_element(By.ID, "MakerComboBox")
+        location_button_container = location_container.find_element(By.CLASS_NAME, "HTMLButton")
+        location_select = location_button_container.find_element(By.TAG_NAME, "button")
         self.driver.execute_script("arguments[0].click();", location_select)
 
         select_element = self.driver.find_element(By.ID, "lookupInput")

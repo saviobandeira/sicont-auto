@@ -1,7 +1,7 @@
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
-from utils.wait_element import wait_for_element
+from utils.wait_element import wait_element_visible
 import os
 from dotenv import load_dotenv
 from selenium.webdriver.support.select import Select
@@ -19,7 +19,7 @@ class LoginPage:
         self.driver.get("http://ctp.sudoesteinformatica.com.br/webrun/open.do?action=open&sys=CTP")
 
         iframe_locator = (By.XPATH, "//iframe[@name='mainform']")
-        iframe = wait_for_element(self.driver, iframe_locator)
+        iframe = wait_element_visible(self.driver, iframe_locator)
         self.driver.switch_to.frame(iframe)
 
         username_field = self.driver.find_element(By.XPATH, """

@@ -1,7 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
-from login import LoginPage
+from login import login
 from config import LOGIN_PAGE_URL
 
 
@@ -18,8 +18,8 @@ def create_driver(headless=False):
     return driver
 
 driver = create_driver()
-LoginPage(driver).login()
 
+login(driver)
 
 print('Press any button to close.')
 input()
